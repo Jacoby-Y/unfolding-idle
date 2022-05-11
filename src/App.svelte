@@ -1,39 +1,34 @@
 <script>
-	let cash = 0;
+	import { onMount } from "svelte";
+	import Main from "./Main.svelte";
 
-	const cl_cash = ()=>{
-		cash += 1;
+	let view = null;
+
+	onMount(()=> window.onresize());
+
+	window.onresize = ()=>{
+		let scale = 1;
+		const w = document.body.clientWidth;
+		const h = document.body.clientHeight;
+		if (w*0.6 >= h) scale = h/600;
+		else scale = w/1000;
+		
+		view.style.transform = `translate(-50%, -50%) scale(${scale}, ${scale})`;
 	}
 </script>
 
-<main>
-	<h3 id="cash-txt">Cash: {cash}</h3>
-	<button id="cl-cash" on:click={cl_cash}>Get 1 Cash</button>
+<main bind:this={view}>
+	<Main/>
 </main>
 
 <style>
 	main {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		background-color: #333;
-	}
-	#cl-cash {
 		position: absolute;
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%, -50%);
-		padding: 1rem 1.2rem;
-		font-size: 1.2rem;
-		font-weight: bold;
-		border: none;
-		border-radius: 0;
-		background-color: #888;
-	}
-	#cl-cash:hover { opacity: 0.8; }
-	#cl-cash:active { opacity: 0.6; }
-	#cash-txt {
-		padding: 1rem 1.2rem;
-		font-size: 1.5rem;
+
+		width: 1000px;
+		height: 600px;
 	}
 </style>

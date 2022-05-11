@@ -1,13 +1,8 @@
 * { margin: 0; padding: 0; }
 
 html, body {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-
-	width: 1000px;
-	height: 600px;
+	width: 100vw;
+	height: 100vh;
 }
 body {
 	box-sizing: border-box;
